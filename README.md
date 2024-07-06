@@ -2,7 +2,7 @@
 
 This is a garden companion app, to help you grow the vegetables you want to grow, at the right time.
 
-# How it came to be
+## How it came to be
 
 We had 7 days to build our bootcamp final group project.
 
