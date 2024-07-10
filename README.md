@@ -20,6 +20,10 @@ Then as the project progressed we had standups twice daily, to find out where ev
 
 Login > Create a garden > Customize your garden layout > Choose recommended vegetables to plant based on season > Log watering / see when they were last watered > get plant care details.
 
+The garden layout utilizes an NPM package called React-Grid-Layout.
+
+We wanted to use an API with plant data, but due to costs and a mismatch between NZ and US names for vegetables, we decided to instead use the google Gemini API, where we told it to give us JSON containing the specific data that we need. We haven't exactly tested how accurate the responses are, but based on what I've seen it suits our purposes well.
+
 ## What we learnt
 
 To build a good app with a new team of 7 in 7 days, good planning is imperitive. 
