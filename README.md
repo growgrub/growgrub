@@ -26,7 +26,7 @@ We wanted to use an API with plant data, but due to costs and a mismatch between
 
 ## What we learnt
 
-To build a good app with a new team of 7 in 7 days, good planning is imperitive. 
+To build a good app with a new team of 7 in 7 days, good planning is imperitive.
 
 I needed to take a leadership role with my idea, to convey my vision of features, but I also wanted to create space for everybody to take ownership over the app. I learnt quickly that if I wasn't game to make the big decisions then we weren't going to move forward quickly enough to have the app working in time.
 
@@ -44,8 +44,8 @@ pages / GardenView
 components / GardenForm && GardenSelect && GardenGrid && PlotPlantSuggestionDropDown
 
 BACK END
-routes / growGrub.ts - line 195 - router.post('/gardens'
-routes / growGrub.ts - line 233 - router.put('/gardens/:id'
+routes / growGrub.ts - line 195 - router.post('/gardens'...)
+routes / growGrub.ts - line 233 - router.put('/gardens/:id'...)
 db / growGrub.ts - line 43 - getAllUsersPlots
 db / growGrub.ts - line 43 - getPlotPlantsByPlotId
 db / growGrub.ts - line 97 - getPlantIDs
@@ -65,7 +65,6 @@ As this code base was built inside our cohorts Dev Academy org, the commit histo
 
 ### Installation
 
-
 #### **From the command line**
 
 ```
@@ -80,4 +79,5 @@ npm run dev # to start the dev server
 You can find the server running on [http://localhost:3000](http://localhost:3000) and the client running on [http://localhost:5173](http://localhost:5173).
 
 ---
+
 [Provide feedback on this repo](https://docs.google.com/forms/d/e/1FAIpQLSfw4FGdWkLwMLlUaNQ8FtP2CTJdGDUv6Xoxrh19zIrJSkvT4Q/viewform?usp=pp_url&entry.1958421517=boilerplate-fullstack)
