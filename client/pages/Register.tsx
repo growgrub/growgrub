@@ -4,10 +4,7 @@ import { addUser } from '../apis/growGrub.ts'
 import { useHooks } from '../hooks/useHooks.ts'
 import DropDownAutoFilter from '../components/DropDownAutoFilter.tsx'
 import titleWord from '../functions/titleWord.ts'
-import { MouseEvent } from 'react'
 import PrimaryButton from '../components/PrimaryButton'
-import { Link } from 'react-router-dom'
-import SecondaryButton from '../components/SecondaryButton'
 import Banner from '../components/Banner.tsx'
 
 interface UserData {
@@ -96,14 +93,14 @@ export default function Register({ registered, setRegistered }: Props) {
   const handleMonthSelect = (option: string) => {
     setFormData((prev) => ({ ...prev, summerStarts: option }))
   }
-  
+
   return (
     <>
-      <Banner 
+      <Banner
         bannerInfo={{
-          title: "Create your profile to start your garden"
+          title: 'Create your profile to start your garden',
         }}
-        />
+      />
       {/* <div
         className="banner-container relative flex h-96 items-center justify-center bg-cover bg-center"
         style={{
@@ -117,8 +114,8 @@ export default function Register({ registered, setRegistered }: Props) {
           </h2>
         </div>
       </div> */}
-      <div className="align-center flex justify-center py-20 text-gray-800 text-left">
-        <div className="container w-1/2 mx-auto rounded bg-slate-100 p-3">
+      <div className="align-center flex justify-center py-20 text-left text-gray-800">
+        <div className="container mx-auto w-1/2 rounded bg-slate-100 p-3">
           <div className="m-2 flex gap-2">
             <div className="mt-2 flex flex-col gap-2 pr-2">
               <p className="font-bold">UserName:</p>
@@ -169,18 +166,20 @@ export default function Register({ registered, setRegistered }: Props) {
             </div>
           </div>
           {displayMessage && <div>{displayMessage}</div>}
-          {!registered && usernameList && (<>
-            <div className="flex items-center justify-end p-4">
-            <PrimaryButton
-              onClick={() => handleOnRegister()}
-              //   () => {
-              //   throw new Error('Function not implemented.')
-              // }}
-            >
-              Get Growing!
-            </PrimaryButton>
-            </div>
-          </>)}
+          {!registered && usernameList && (
+            <>
+              <div className="flex items-center justify-end p-4">
+                <PrimaryButton
+                  onClick={() => handleOnRegister()}
+                  //   () => {
+                  //   throw new Error('Function not implemented.')
+                  // }}
+                >
+                  Get Growing!
+                </PrimaryButton>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </>

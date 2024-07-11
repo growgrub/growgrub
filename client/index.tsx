@@ -15,8 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
      * TODO: replace domain, clientId, and audience
      */
     <Auth0Provider
-      domain="https://whai-2024-zachary.us.auth0.com"
-      clientId="3djVB6gAA8HhFRGjDz8FxLspWb4pEXwA"
+      domain="https://whai-2024-andrew.au.auth0.com"
+      clientId="uOM3AK4oJW6mfB4VNoEsJIDYMPTGBr87"
       authorizationParams={{
         redirect_uri: window.location.origin,
         audience: 'https://grow-grub/api',
