@@ -3,7 +3,6 @@ import spinachIcon from '/images/flat-icons/spinach.png'
 import carrotIcon from '/images/flat-icons/carrot.png'
 import wateringCanIcon from '/images/flat-icons/watering-can.png'
 import TaskTable from '../components/TasksTable'
-import Banner from '../components/Banner'
 
 export default function Home() {
   return (
@@ -41,8 +40,8 @@ export default function Home() {
       </div>
       <div className="mb-20 mt-10">
         <div className="list-container mx-auto max-w-7xl">
-          <h3 className="text-3xl font-bold">Today's Tasks</h3>
-          <TaskTable id={0} title={''} content={''} />
+          <h3 className="text-3xl font-bold">{`Today's Tasks`}</h3>
+          <TaskTable />
         </div>
       </div>
     </>

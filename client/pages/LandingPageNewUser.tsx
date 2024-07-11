@@ -1,7 +1,4 @@
-import { MouseEvent } from 'react'
 import PrimaryButton from '../components/PrimaryButton'
-import { Link } from 'react-router-dom'
-import SecondaryButton from '../components/SecondaryButton'
 import { useAuth0 } from '@auth0/auth0-react'
 
 export default function LandingPageNewUser() {
@@ -34,11 +31,11 @@ export default function LandingPageNewUser() {
       <div className="flex justify-center pb-3">
         <div className="text-center">
           <h2 className="text-xl font-semibold text-green-700">
-            Let's setup your garden!
+            {`Let's setup your garden!`}
           </h2>
           <p className="max-w-sm py-4 text-base text-green-700">
-            It's time to start planting and growing your favourite vegetables.
-            Create your first garden and watch your green paradise come to life!
+            {`It's time to start planting and growing your favourite vegetables.
+            Create your first garden and watch your green paradise come to life!`}
           </p>
         </div>
       </div>
@@ -46,14 +43,14 @@ export default function LandingPageNewUser() {
         {/* Link to Register page */}
         <div className="mr-4">
           {/* <Link to="/register"> */}
-            <PrimaryButton
-              onClick={handleLog}
-              //   () => {
-              //   throw new Error('Function not implemented.')
-              // }}
-            >
-              Sign in
-            </PrimaryButton>
+          <PrimaryButton
+            onClick={handleLog}
+            //   () => {
+            //   throw new Error('Function not implemented.')
+            // }}
+          >
+            Sign in
+          </PrimaryButton>
           {/* </Link> */}
         </div>
       </div>

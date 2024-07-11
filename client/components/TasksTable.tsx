@@ -3,14 +3,14 @@ import PrimaryButton from './PrimaryButton'
 import SecondaryButton from './SecondaryButton'
 import { useCompleteSingleTask, useGetTasks } from '../hooks/useHooks'
 
-interface TaskProps {
-  id: number
-  plantName: string
-  plantImage: string
-  plantedDate: string // or number?
-  taskType: string
-  lastPerformed: string // or number?
-}
+// interface TaskProps {
+//   id: number
+//   plantName: string
+//   plantImage: string
+//   plantedDate: string // or number?
+//   taskType: string
+//   lastPerformed: string // or number?
+// }
 
 //mockData
 // const tasks: TaskProps = [
@@ -40,7 +40,7 @@ interface TaskProps {
 //   },
 // ]
 
-const TaskTable: React.FC<TaskProps> = () => {
+const TaskTable = () => {
   // const getTasks = useGetUpdatedTasks()
   const taskQuery = useGetTasks()
 
