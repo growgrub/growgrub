@@ -293,9 +293,6 @@ export async function addPlant(promptResult) {
     console.log(
       `Plant with name '${promptResult.plantCareData[0].plantName}' already exists in the plants database`,
     )
-    console.log(
-      `Plant with name '${promptResult.plantCareData[0].plantName}' already exists in the plants database`,
-    )
     return existingPlant
   } else {
     const promptData = {

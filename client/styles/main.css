@@ -131,3 +131,10 @@
 .smlDel {
   margin-left: 0.25em;
 }
+
+@media only screen and (max-width: 600px) {
+  .gardenview {
+    display: flex;
+    flex-direction: column;
+  }
+}

@@ -317,7 +317,6 @@ router.put('/tasks', checkJwt, async (req: JwtRequest, res) => {
     try {
       const currentDate = new Date()
       const plotsPlants = await db.getPlotsPlantsJoinByAuth(auth0Id)
-      console.log(`plotsPlants join data is:`, plotsPlants)
       const existingUncompletedTasks =
         await db.getUncompletedTasksByAuth(auth0Id)
 
@@ -329,10 +328,7 @@ router.put('/tasks', checkJwt, async (req: JwtRequest, res) => {
 
       await db.updateTasks(tasksToUpdate)
       await db.createTasks(tasksToCreate)
-      console.log(tasksToUpdate)
-      console.log(tasksToCreate)
       const refreshedTasks = await db.getUpdatedTasksByAuth(auth0Id)
-      console.log(refreshedTasks)
       res.json(refreshedTasks)
     } catch (error) {
       console.log(error)
