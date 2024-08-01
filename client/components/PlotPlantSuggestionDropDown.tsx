@@ -14,8 +14,12 @@ function PlotPlantSuggestionDropDown({
 }: Props) {
   const hooks = useHooks()
   const plantsQuery = hooks.useGetPlants()
+  const user = hooks.useGetUser()
 
-  const userSummerStartMonth = 'september'
+  let userSummerStartMonth = ''
+  if (user.data) {
+    userSummerStartMonth = user.data.summerStarts
+  }
 
   const dateNow = new Date()
   const currentMonthIndex = dateNow.getMonth()
@@ -76,28 +80,31 @@ function PlotPlantSuggestionDropDown({
   }
 
   const currentSeason = seasons[numMonthsSinceEarlySummer!]
-  const nextSeasonPhase = seasons[numMonthsSinceEarlySummer! + 1]
-    ? seasons[numMonthsSinceEarlySummer! + 1]
-    : seasons[0]
-
+  const lastSeasonPhase = seasons[numMonthsSinceEarlySummer! - 1]
+    ? seasons[numMonthsSinceEarlySummer! - 1]
+    : seasons[11]
+  console.log(lastSeasonPhase)
   // FILTER
   let plantSuggestions: string[] = []
   let otherPlantSuggestions: string[] = []
   if (plantsQuery.data) {
     const filteredBySun = plantsQuery.data.filter(
       (plant: Plant) =>
-        plant.sun_level.includes(plotSunLevel!) ||
         plotSunLevel === undefined ||
-        (plant.sun_level.includes('partial-shade') &&
-          plotSunLevel! === 'part-sun') ||
-        (plant.sun_level.includes('partial-sun') &&
-          plotSunLevel! === 'part-sun'),
+        plant.sun_level.toLowerCase().includes(plotSunLevel) ||
+        (plant.sun_level.toLowerCase().includes('partial-shade') &&
+          plotSunLevel === 'part-sun') ||
+        (plant.sun_level.toLowerCase().includes('partial-sun') &&
+          plotSunLevel === 'part-sun'),
     )
     const filteredBySeason = filteredBySun.filter(
       (plant) =>
         plant.planting_starts.toLowerCase() === 'year-round' ||
         plant.planting_starts.toLowerCase().includes(currentSeason) ||
-        plant.planting_starts.toLowerCase().includes(nextSeasonPhase),
+        plant.planting_starts
+          .toLowerCase()
+          .includes(currentSeason.split('-').join(' ')) ||
+        plant.planting_starts.toLowerCase().includes(lastSeasonPhase),
     )
     plantSuggestions = filteredBySeason.map((plant: Plant) => plant.name)
     otherPlantSuggestions = plantsQuery.data

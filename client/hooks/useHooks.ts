@@ -19,6 +19,7 @@ export function useHooks() {
     useGetGardens,
     useAddPlant,
     useGetTasks,
+    useGetUser,
   }
 }
 
@@ -272,6 +273,21 @@ export function useCompleteSingleTask() {
     },
     onSuccess: async () => {
       queryClient.invalidateQueries({ queryKey: ['tasks'] })
+    },
+  })
+}
+
+export function useGetUser() {
+  const { getAccessTokenSilently, isAuthenticated } = useAuth0()
+  return useQuery({
+    enabled: isAuthenticated,
+    queryKey: ['user'],
+    queryFn: async () => {
+      const token = await getAccessTokenSilently()
+      const res = await request
+        .get(`${rootURL}/users`)
+        .set('Authorization', `Bearer ${token}`)
+      return res.body
     },
   })
 }
