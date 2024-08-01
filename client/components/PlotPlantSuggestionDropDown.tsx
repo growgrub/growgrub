@@ -60,7 +60,7 @@ function PlotPlantSuggestionDropDown({
   const indexOfSummerMonth = months.findIndex(
     (month) => month === userSummerStartMonth.toLowerCase(),
   )
-  const numMonthsSinceEarlySummer = getMonthsSinceEarlySummer(
+  const currentSeasonIndex = getMonthsSinceEarlySummer(
     indexOfSummerMonth,
     currentMonthIndex,
   )
@@ -73,17 +73,44 @@ function PlotPlantSuggestionDropDown({
     }
     if (currMonthIndex === summerStartIndex) {
       return 0
-    }
-    if (currMonthIndex > summerStartIndex) {
+    } else {
+      //currMonthIndex > summerStartIndex
       return currMonthIndex - summerStartIndex
     }
   }
 
-  const currentSeason = seasons[numMonthsSinceEarlySummer!]
-  const lastSeasonPhase = seasons[numMonthsSinceEarlySummer! - 1]
-    ? seasons[numMonthsSinceEarlySummer! - 1]
-    : seasons[11]
-  console.log(lastSeasonPhase)
+  function canBePlantedNow(plant: Plant) {
+    // add index of planting_starts for each plant
+    if (
+      plant.planting_starts.split(' ').join('-').toLowerCase() === 'year-round'
+    )
+      return true
+
+    const plantingStartsIndex = seasons.findIndex(
+      (season) =>
+        season === plant.planting_starts.split(' ').join('-').toLowerCase(),
+    )
+    const plantingEndsIndex = seasons.findIndex(
+      (season) =>
+        season === plant.planting_ends.split(' ').join('-').toLowerCase(),
+    )
+    // add index of planting_ends for each
+
+    // year round included
+    if (plantingStartsIndex < plantingEndsIndex) {
+      if (
+        currentSeasonIndex >= plantingStartsIndex &&
+        currentSeasonIndex <= plantingEndsIndex
+      )
+        return true
+    } else if (
+      currentSeasonIndex >= plantingStartsIndex ||
+      currentSeasonIndex <= plantingEndsIndex
+    )
+      return true
+    else return false
+  }
+
   // FILTER
   let plantSuggestions: string[] = []
   let otherPlantSuggestions: string[] = []
@@ -97,18 +124,10 @@ function PlotPlantSuggestionDropDown({
         (plant.sun_level.toLowerCase().includes('partial-sun') &&
           plotSunLevel === 'part-sun'),
     )
-    const filteredBySeason = filteredBySun.filter(
-      (plant) =>
-        plant.planting_starts.toLowerCase() === 'year-round' ||
-        plant.planting_starts.toLowerCase().includes(currentSeason) ||
-        plant.planting_starts
-          .toLowerCase()
-          .includes(currentSeason.split('-').join(' ')) ||
-        plant.planting_starts.toLowerCase().includes(lastSeasonPhase),
-    )
+    const filteredBySeason = filteredBySun.filter(canBePlantedNow)
     plantSuggestions = filteredBySeason.map((plant: Plant) => plant.name)
     otherPlantSuggestions = plantsQuery.data
-      .filter((plant) => !plantSuggestions.includes(plant.name))
+      .filter((plant: Plant) => !plantSuggestions.includes(plant.name))
       .map((plant: Plant) => plant.name)
   }
 
@@ -116,7 +135,7 @@ function PlotPlantSuggestionDropDown({
     <>
       <p>Recommended plants:</p>
       <DropDownAutoFilter
-        options={plantSuggestions}
+        options={plantSuggestions.sort()}
         onSelect={handlePlantSelect}
         containerClass={
           'container absolute w-full border-b-[1px] border-t-[1px]  border-l-[1px] border-r-[1px] border-black bg-white rounded'
@@ -124,7 +143,7 @@ function PlotPlantSuggestionDropDown({
       />
       <p>Other plants:</p>
       <DropDownAutoFilter
-        options={otherPlantSuggestions}
+        options={otherPlantSuggestions.sort()}
         onSelect={handlePlantSelect}
         containerClass={
           'container absolute w-full border-b-[1px] border-t-[1px]  border-l-[1px] border-r-[1px] border-black bg-white rounded'
