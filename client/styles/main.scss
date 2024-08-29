@@ -9,9 +9,17 @@
   @apply mx-auto mt-4 flex max-w-7xl justify-center p-8;
 }
 
+.quick-link-card {
+  @apply mx-4 flex-1;
+}
+
 /* Table stying */
 .table-header {
   @apply bg-slate-50 px-4 py-2 text-left font-light uppercase;
+}
+
+.table {
+  @apply w-full table-auto;
 }
 
 /* Page Banner */
@@ -142,4 +150,15 @@
     display: flex;
     flex-direction: column;
   }
+  .quick-links-container {
+    @apply flex-col;
+  }
+
+  .quick-link-card {
+    @apply my-2;
+  }
+
+  // .table {
+  //   @apply w-screen;
+  // }
 }

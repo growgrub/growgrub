@@ -77,7 +77,7 @@ const TaskTable = () => {
 
       {/* Table */}
       <div className="overflow-x-auto pt-4">
-        <table className="w-full table-auto">
+        <table className="table">
           {/* Table header */}
           <thead>
             <tr className="bg-slate-50">

@@ -21,7 +21,7 @@ export default function Home() {
           </h2>
         </div>
       </div>
-      <div className="mx-auto mt-4 flex max-w-7xl justify-center p-8">
+      <div className="quick-links-container">
         <QuickLinksCards
           icon={<img src={spinachIcon} alt="Spinach" />}
           text={'My Garden'}
