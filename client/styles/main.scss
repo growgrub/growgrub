@@ -158,7 +158,11 @@
     @apply my-2;
   }
 
-  // .table {
-  //   @apply w-screen;
-  // }
+  .dropdown-menu {
+    // display: block;
+    position: relative;
+    top: 30px;
+    background-color: #fff;
+    @apply z-10 flex flex-col p-2;
+  }
 }

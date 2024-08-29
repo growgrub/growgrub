@@ -11,16 +11,13 @@ import {
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { useAuth0 } from '@auth0/auth0-react'
 import { Link, useLocation } from 'react-router-dom'
-import { useGetUser } from '../hooks/useHooks'
+// import { useGetUser } from '../hooks/useHooks'
 import { useEffect, useState } from 'react'
 
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
+interface Props {
+  registered: boolean
 }
-
-interface Props { registered: boolean}
-export default function Header({registered}: Props) {
+export default function Header({ registered }: Props) {
   const { loginWithRedirect, logout, isAuthenticated } = useAuth0()
 
   const location = useLocation()
@@ -29,16 +26,20 @@ export default function Header({registered}: Props) {
     { name: 'My Garden', path: '/my-garden', current: false },
     { name: 'My Tasks', path: '/my-tasks', current: false },
     { name: 'My Plants', path: '/my-plants', current: false },
-  ]
-)
+  ])
 
-useEffect(() => {
-  const updatedNavigation = navigation.map(item => ({
-    ...item, current: item.path === location.pathname,
-  }))
-  setNavigation(updatedNavigation)
-}, [location.pathname])
-  
+  useEffect(() => {
+    const updatedNavigation = navigation.map((item) => ({
+      ...item,
+      current: item.path === location.pathname,
+    }))
+    setNavigation(updatedNavigation)
+  }, [])
+
+  function classNames(...classes) {
+    return classes.filter(Boolean).join(' ')
+  }
+
   const handleLog = () => {
     if (isAuthenticated) logout()
     else loginWithRedirect()
@@ -60,6 +61,21 @@ useEffect(() => {
                     <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
                   )}
                 </DisclosureButton>
+                <DisclosurePanel as="ul" className="dropdown-menu">
+                  {open &&
+                    registered &&
+                    navigation.map((item) => (
+                      <li key={item.name}>
+                        <Link
+                          to={item.path}
+                          className="py-2 text-sm font-medium text-gray-500 hover:text-gray-700"
+                          aria-current={item.current ? 'page' : undefined}
+                        >
+                          {item.name}
+                        </Link>
+                      </li>
+                    ))}
+                </DisclosurePanel>
               </div>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
@@ -69,7 +85,7 @@ useEffect(() => {
                     alt="Grow-grub Ltd. logo"
                   />
                 </div>
-                {registered && 
+                {registered && (
                   <div className="hidden sm:ml-6 sm:block">
                     <div className="flex space-x-4">
                       {navigation.map((item) => (
@@ -79,8 +95,7 @@ useEffect(() => {
                           className={classNames(
                             item.current
                               ? 'border-b-4 border-green-600 text-gray-700'
-                              : 'text-gray-500 hover:text-gray-700',
-                            'py-2 text-sm font-medium',
+                              : 'hover:text-gray-700py-2 text-sm font-medium text-gray-500',
                           )}
                           aria-current={item.current ? 'page' : undefined}
                         >
@@ -89,7 +104,7 @@ useEffect(() => {
                       ))}
                     </div>
                   </div>
-                }
+                )}
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <button
