@@ -4,6 +4,11 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Home */
+.quick-links-container {
+  @apply mx-auto mt-4 flex max-w-7xl justify-center p-8;
+}
+
 /* Table stying */
 .table-header {
   @apply bg-slate-50 px-4 py-2 text-left font-light uppercase;
