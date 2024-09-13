@@ -2,6 +2,8 @@
 
 This is a garden companion app, to help you grow the vegetables you want to grow, at the right time.
 
+Right now you can find the live app at https://grow-grub.andrewmolten.com/
+
 ## How it came to be
 
 We had 7 days to build our bootcamp final group project.
